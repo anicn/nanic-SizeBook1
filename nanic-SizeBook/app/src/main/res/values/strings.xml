@@ -1,0 +1,14 @@
+<resources>
+    <string name="title_second">Enter Details</string>
+    <string name="app_name">nanic-SizeBook</string>
+    <string name="name">Enter your name</string>
+    <string name="OK">OK</string>
+    <string name="date">Date (yyyy-mm-dd)</string>
+    <string name="neck">Neck circumference</string>
+    <string name="bust">Bust in inches</string>
+    <string name="chest">Chest in inches</string>
+    <string name="waist">Waist in inches</string>
+    <string name="hip">Hip in inches</string>
+    <string name="inseam">Inseam in inches</string>
+    <string name="comment">Comment</string>
+</resources>
