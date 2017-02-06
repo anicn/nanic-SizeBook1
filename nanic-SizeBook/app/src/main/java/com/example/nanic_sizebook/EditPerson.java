@@ -38,7 +38,7 @@ public class EditPerson extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
         //gets extras from bundle, gets mouse click position
-        //and corresponding item in recordsList
+        //and corresponding item in personsList
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("pos");
         Button deleteButton = (Button) findViewById(R.id.delete);
@@ -46,14 +46,16 @@ public class EditPerson extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
+                //nanic
                 //taken from http://stackoverflow.com/questions/3579981/why-is-my-arraylist-removeid-call-not-working
-                //Feb 2, 2017, 19:19
-                ((MyApplication)getApplicationContext()).personsList.remove(((MyApplication)getApplicationContext()).personsList.get(id));
+                //Feb 1, 2017, 14:00
+                ((PersonApplication)getApplicationContext()).personsList.remove(((PersonApplication)getApplicationContext()).personsList.get(id));
                 saveInFile();
             }
         });
+
         //sets instance variables of this record as hint text
-        Person person = ((MyApplication)getApplicationContext()).personsList.get(id);
+        Person person = ((PersonApplication)getApplicationContext()).personsList.get(id);
         EditText nameText = (EditText) findViewById(R.id.nameFieldEdit);
         nameText.setHint(person.getName());
 
@@ -81,17 +83,18 @@ public class EditPerson extends AppCompatActivity {
         EditText commentText = (EditText) findViewById(R.id.commentFieldEdit);
         commentText.setHint(person.getComment());
 
+        // the save button which when clicked
+        // saves the changes in the EditText fields
         Button saveChangesButton = (Button) findViewById(R.id.saveChanges);
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sets attributes of this record to what is in the EditText if the
-                //EditText is not empty
-                Person person = ((MyApplication)getApplicationContext()).personsList.get(id);
+                //sets attributes of this person to what is in the EditText unless empty
+                Person person = ((PersonApplication)getApplicationContext()).personsList.get(id);
                 dateBody = (EditText) findViewById(R.id.dateFieldEdit);
                 String date = dateBody.getText().toString();
                 //taken from http://stackoverflow.com/questions/14721397/checking-if-a-string-is-empty-or-null-in-java
-                //Feb 2, 2017, 20:22
+                //Feb 1, 2017, 14:30
                 if (date != null && !date.isEmpty()) {
                     person.setDate(date);
                 }
@@ -148,15 +151,16 @@ public class EditPerson extends AppCompatActivity {
             }
         });
     }
-
+    // does the saving to our globally
+    // defined FILENAME
     private void saveInFile() {
         try {
-            FileOutputStream fos = openFileOutput(((MyApplication)getApplicationContext()).FILENAME,
+            FileOutputStream fos = openFileOutput(((PersonApplication)getApplicationContext()).FILENAME,
                     Context.MODE_PRIVATE);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
 
             Gson gson = new Gson();
-            gson.toJson(((MyApplication)getApplicationContext()).personsList, out);
+            gson.toJson(((PersonApplication)getApplicationContext()).personsList, out);
             out.flush();
 
             fos.close();

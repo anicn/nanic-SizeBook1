@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 //taken from http://stackoverflow.com/questions/11932178/in-android-how-to-make-array-list-available-to-one-or-more-activities
 
-public class MyApplication extends Application {
+public class PersonApplication extends Application {
     public ArrayList<Person> personsList = null;
     public static final String FILENAME = "file.sav";
 
-    public MyApplication() {
+    public PersonApplication() {
         personsList = new ArrayList<Person>();
     }
 }

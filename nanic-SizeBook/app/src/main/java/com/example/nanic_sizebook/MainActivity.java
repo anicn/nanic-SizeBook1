@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         oldPersonsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                //mouse click position is passed via bundle, string key "pos"
-                //is retrieved later in EditRecord activity
+                //mouse click position is passed thru bundle, string key "pos"
+                //is retrieved later in EditPerson activity
                 Bundle bundle = new Bundle();
                 bundle.putInt("pos", position);
                 editPerson(bundle);
@@ -54,23 +54,23 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-        int numPersons = ((MyApplication)getApplicationContext()).personsList.size();
+        int numPersons = ((PersonApplication)getApplicationContext()).personsList.size();
         TextView textView = (TextView) this.findViewById(R.id.Persons);
         String personsCount = "Number of Entries: " + String.valueOf(numPersons);
         textView.setText(personsCount);
         textView.setTextColor(0xff0000ff);
 
     }
-    //editPerson called whenever an item from oldPersonsList is clicked
+    // editPerson called whenever an item from oldPersonsList is clicked
     public void editPerson (Bundle bundle) {
         Intent intent = new Intent(this, EditPerson.class);
         intent.putExtras(bundle);
         startActivity(intent);
         adapter.notifyDataSetChanged();
     }
-    //addRecord called when add record button clicked
-    //no listener, method called when button clicked
-    //on click in activity_main.xml
+    // addPerson called when add person button clicked
+    // no need for a listener, method only gets called when button is clicked
+    // this happens through activity_main.xml
     public void addPerson(View view) {
         Intent intent = new Intent(this, AddPerson.class);
         startActivity(intent);
@@ -79,20 +79,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFromFile() {
         try {
-            FileInputStream fis = openFileInput(((MyApplication)getApplicationContext()).FILENAME);
+            FileInputStream fis = openFileInput(((PersonApplication)getApplicationContext()).FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
             Gson gson = new Gson();
 
-            //taken from stack overflow idk what or how it works ...
-            //http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
-            // date
+            //taken from http://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
+            // Feb 1, 2017, 18:00
             Type listType = new TypeToken<ArrayList<Person>>() {}.getType();
-            ((MyApplication)getApplicationContext()).personsList = gson.fromJson(in, listType);
+            ((PersonApplication)getApplicationContext()).personsList = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            ((MyApplication)getApplicationContext()).personsList = new ArrayList<Person>();
+            ((PersonApplication)getApplicationContext()).personsList = new ArrayList<Person>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         loadFromFile();
 
-        adapter = new PersonAdapter(this, R.layout.record_list,((MyApplication)getApplicationContext()).personsList);
+        adapter = new PersonAdapter(this, R.layout.record_list,((PersonApplication)getApplicationContext()).personsList);
         oldPersonsList.setAdapter(adapter);
     }
 }

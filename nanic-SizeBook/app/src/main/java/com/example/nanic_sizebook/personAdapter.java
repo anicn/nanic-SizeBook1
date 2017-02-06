@@ -1,8 +1,5 @@
 package com.example.nanic_sizebook;
 
-/**
- * Created by anicn on 2017-01-28.
- */
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

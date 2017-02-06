@@ -47,6 +47,8 @@ public class AddPerson extends AppCompatActivity {
                 setResult(RESULT_OK);
                 nameBody = (EditText) findViewById(R.id.nameField);
                 String name = nameBody.getText().toString();
+                // taken from http://stackoverflow.com/questions/3500197/how-to-display-toast-in-android
+                // Feb 4, 2017, 13:00
                 // name field is required
                 if (name.matches("")) {
                     Toast.makeText(getApplicationContext(), "Name Field is Required.", Toast.LENGTH_LONG).show();
@@ -59,8 +61,8 @@ public class AddPerson extends AppCompatActivity {
                 person = new Person(name);
 
                 //taken from http://stackoverflow.com/questions/6290531/check-if-edittext-is-empty
-                //Feb 1, 2017, 16:18
-                //sets attributes of record to whatever is in the EditText
+                //Feb 4, 2017, 15:00
+                //sets attributes of person to whatever is in the EditText
                 //if EditText is empty, sets attribute to NULL
                 dateBody = (EditText) findViewById(R.id.dateField);
                 String date = dateBody.getText().toString();
@@ -132,7 +134,7 @@ public class AddPerson extends AppCompatActivity {
                     person.setComment(commentText);
                 }
 
-                ((MyApplication)getApplicationContext()).personsList.add(person);
+                ((PersonApplication)getApplicationContext()).personsList.add(person);
                 saveInFile();
 
 
@@ -141,14 +143,16 @@ public class AddPerson extends AppCompatActivity {
         });
 
     }
+    // does the saving to our globally
+    // defined FILENAME
     private void saveInFile() {
         try {
-            FileOutputStream fos = openFileOutput(((MyApplication)getApplicationContext()).FILENAME,
+            FileOutputStream fos = openFileOutput(((PersonApplication)getApplicationContext()).FILENAME,
                     Context.MODE_PRIVATE);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
 
             Gson gson = new Gson();
-            gson.toJson(((MyApplication)getApplicationContext()).personsList, out);
+            gson.toJson(((PersonApplication)getApplicationContext()).personsList, out);
             out.flush();
 
             fos.close();
