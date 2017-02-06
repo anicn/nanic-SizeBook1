@@ -1,9 +1,5 @@
 package com.example.nanic_sizebook;
 
-/**
- * Created by anicn on 2017-01-28.
- */
-
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +16,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * Creates a class called AddPerson which allows
+ * us to add another Person class and all of the attributes that are associated
+ * with that class.
+ */
+
 public class AddPerson extends AppCompatActivity {
 
     private EditText nameBody;
@@ -31,8 +33,6 @@ public class AddPerson extends AppCompatActivity {
     private EditText hipBody;
     private EditText inseamBody;
     private EditText commentBody;
-
-
 
 
     @Override

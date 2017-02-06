@@ -1,16 +1,15 @@
 package com.example.nanic_sizebook;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * Created by anicn on 2017-01-26.
- *  creates a class called Person which represents an individual
+ *  Creates a class called Person which represents
+ *  each individual who has a record in the app.
  */
 
 public class Person implements Serializable {
 
-    // attributes of a Person class
+    // attributes that each Person contains
     private String name;
     private String date;
     private String neckSize;
@@ -27,7 +26,7 @@ public class Person implements Serializable {
         this.name = "Name: " + name;
     }
 
-
+    // getters and setters for all of the attributes
     public String getName() {
         return name;
     }
@@ -108,6 +107,8 @@ public class Person implements Serializable {
         this.id = id;
     }
 
+    // we use this to display the main info
+    // for each Persons attributes on the main screen
     @Override
     public String toString() {
         return "Name: " + name +  " | " + "Bust: " + this.getBustSize() + " | " + "Chest: " + this.getChestSize() + " | " + "Waist: " + this.getWaistSize() + " | " + "Inseam: " + this.getInseamSize();

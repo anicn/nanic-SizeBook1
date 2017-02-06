@@ -15,6 +15,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * Creates a class called EditPerson which allows
+ * us to edit all of the attributes that are associated
+ * with the Person class.
+ */
+
 public class EditPerson extends AppCompatActivity {
     public Integer id;
     private EditText nameBody;
