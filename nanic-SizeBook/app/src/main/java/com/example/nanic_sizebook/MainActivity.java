@@ -58,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) this.findViewById(R.id.Persons);
         String personsCount = "Number of Entries: " + String.valueOf(numPersons);
         textView.setText(personsCount);
+        textView.setTextColor(0xff0000ff);
 
     }
     //editPerson called whenever an item from oldPersonsList is clicked
-    public void editPerson ( Bundle bundle) {
+    public void editPerson (Bundle bundle) {
         Intent intent = new Intent(this, EditPerson.class);
         intent.putExtras(bundle);
         startActivity(intent);
